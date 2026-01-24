@@ -1,1 +1,1 @@
-# classic-social
+# Old School Social

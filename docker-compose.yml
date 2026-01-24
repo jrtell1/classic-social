@@ -1,0 +1,51 @@
+services:
+  php:
+    build: ./docker/app
+    # uncomment the following line if you want to run this in a production environment
+    # restart: unless-stopped
+    ports:
+      - "80:80" # HTTP
+      - "443:443" # HTTPS
+      - "443:443/udp" # HTTP/3
+    volumes:
+      - ./web-app:/app
+      - caddy_data:/data
+      - caddy_config:/config
+    # comment the following line in production, it allows to have nice human-readable logs in dev
+    tty: true
+    depends_on:
+      - mysql
+      - redis
+
+  mysql:
+    image: mysql:8.4.7
+    command: --default-authentication-plugin=mysql_native_password
+    tty: true
+    ports:
+      - "3306:3306" # Exposed for localhost
+    environment:
+      MYSQL_DATABASE: default
+      MYSQL_USER: default
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
+    volumes:
+      - mysql_data:/var/lib/mysql
+    # uncomment the following line if you want to run this in a production environment
+    # restart: unless-stopped
+
+  redis:
+    image: redis:8.0-alpine
+    volumes:
+      - redis_data:/data
+    # uncomment the following line if you want to run this in a production environment
+    # restart: unless-stopped
+    command: ["redis-server"]
+
+# Volumes needed for Caddy certificates and configuration
+volumes:
+  caddy_data:
+  caddy_config:
+  mysql_data:
+  redis_data:
