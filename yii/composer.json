@@ -4,7 +4,7 @@
     "description": "Yii3 web application template",
     "keywords": [
         "yii3",
-        "app"
+        "Kernel"
     ],
     "license": "BSD-3-Clause",
     "support": {

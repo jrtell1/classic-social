@@ -1,0 +1,6 @@
+/vendor/
+/node_modules/
+.idea
+/public/assets/
+/data/
+bolt.db
