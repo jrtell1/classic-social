@@ -1,6 +1,5 @@
 <?php
 
-use App\Controllers\HomeController;
 use Framework\Container;
 
 return function (Container $container) {

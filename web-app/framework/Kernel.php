@@ -2,6 +2,8 @@
 
 namespace Framework;
 
+use Framework\Router\Router;
+use Framework\View\Views;
 use Symfony\Component\HttpFoundation\Request;
 
 class Kernel
@@ -36,6 +38,7 @@ class Kernel
     {
         $this->setupContainer();
         $this->setupRouter();
+        $this->setupViews();
 //        $this->setupDatabase();
     }
 
@@ -62,6 +65,13 @@ class Kernel
         $this->router = new Router();
         $routeLoader = require __DIR__ . '/../config/routes.php';
         $routeLoader($this->router);
+    }
+
+    private function setupViews(): void
+    {
+        /** @var Views $views */
+        $views = $this->container->build(Views::class);
+        $views->loadTemplates();
     }
 
     private function setupDatabase(): void

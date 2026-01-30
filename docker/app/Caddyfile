@@ -1,0 +1,15 @@
+localhost
+
+mercure {
+    anonymous
+}
+
+root public/
+
+php_server {
+    hot_reload
+    worker {
+       file /path/to/my_worker.php
+       watch
+   }
+}

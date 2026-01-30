@@ -1,6 +1,6 @@
 <?php
 
-namespace Framework;
+namespace Framework\Router;
 
 class MatchedRoute {
     public function __construct(
