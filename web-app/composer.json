@@ -7,7 +7,7 @@
             "Framework\\": "framework/"
         },
       "files": [
-        "framework/View/viewHelpers.php"
+        "framework/Templating/viewHelpers.php"
       ]
     },
     "require": {

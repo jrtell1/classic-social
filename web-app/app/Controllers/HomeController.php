@@ -2,21 +2,16 @@
 
 namespace App\Controllers;
 
-use Framework\Response;
-use Framework\View\Views;
+use Framework\Templating\View;
 use Symfony\Component\HttpFoundation\Request;
 
 class HomeController
 {
-    public function __construct(
-        private Views $views
-    ) {}
-
-    public function index(Request $request, array $params): Response
+    public function index(Request $request, array $params): View
     {
-        return new Response($this->views->render('home', [
+        return new View('home', [
             'title' => 'Test title',
             'content' => 'Test paragraph'
-        ]));
+        ]);
     }
 }

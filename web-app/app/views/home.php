@@ -3,8 +3,8 @@
 return function (string $title, string $content): string {
     return layout(<<<HTML
         <main>
-        <h1>{e($title)}</h1>
-        <p>{e($content)}</p>
+        <h1>{$title}</h1>
+        <p>{$content}</p>
         </main>
 HTML);
 };

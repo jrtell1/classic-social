@@ -18,10 +18,10 @@ HTML;
     }
 
     return <<<HTML
-        <DOCTYPE html>
+        <!DOCTYPE html>
         <html lang="en">
         <head>
-        <title>FrankenPHP Hot Reload</title>
+        <title>Classic Social</title>
         {$hotReloadScripts}
         </head>
         <body>

@@ -3,12 +3,14 @@
 namespace Framework;
 
 use Framework\Router\Router;
-use Framework\View\Views;
+use Framework\Templating\Templater;
+use Framework\Templating\View;
 use Symfony\Component\HttpFoundation\Request;
 
 class Kernel
 {
     private Router $router;
+    private Templater $templater;
     private Container $container;
 
     public function handle(Request $request): Response
@@ -27,8 +29,11 @@ class Kernel
 
         $response = $controller->{$matchedRoute->route->action}($request, $matchedRoute->parameters);
 
-        if (!$response instanceof Response) {
-            return new Response('Controller must return a Response', 500);
+        if ($response instanceof View) {
+            $content = $this->templater->render($response->getView(), $response->getData());
+            $response = new Response($content);
+        } else if (!$response instanceof Response) {
+            return new Response('Controller must return a Response or a View', 500);
         }
 
         return $response;
@@ -69,9 +74,8 @@ class Kernel
 
     private function setupViews(): void
     {
-        /** @var Views $views */
-        $views = $this->container->build(Views::class);
-        $views->loadTemplates();
+        $this->templater = new Templater();
+        $this->templater->loadTemplates();
     }
 
     private function setupDatabase(): void
