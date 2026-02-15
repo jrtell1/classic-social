@@ -22,6 +22,8 @@ HTML;
         <html lang="en">
         <head>
         <title>Classic Social</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+        <link rel="stylesheet" href="/main.css" type="text/css">
         {$hotReloadScripts}
         </head>
         <body>
